@@ -1,11 +1,12 @@
+"use strict";
 import eurosFormatter from "./euroFormatter.js";
 
 function createWallet(name, cash = 0) {
   return {
     _name: name,
     _cash: cash,
-    dailyAllowance: 40,
-    dayTotalWithdrawals: 0,
+    _dailyAllowance: 40,
+    _dayTotalWithdrawals: 0,
 
     deposit: function (amount) {
       this._cash += amount;
@@ -16,7 +17,7 @@ function createWallet(name, cash = 0) {
         console.log(`Insufficient funds!`);
         return 0;
       }
-      if (this.dayTotalWithdrawals + amount > this.dailyAllowance) {
+      if (this._dayTotalWithdrawals + amount > this._dailyAllowance) {
         console.log(`Insufficient remaining daily allowance!`);
         return 0;
       }
@@ -36,14 +37,14 @@ function createWallet(name, cash = 0) {
     },
 
     setDailyAllowance: function (newAllowance) {
-      this.dailyAllowance = newAllowance;
+      this._dailyAllowance = newAllowance;
       console.log(
         `Daily allowance set to: ${eurosFormatter.format(newAllowance)}`
       );
     },
 
     resetDailyAllowance: function () {
-      this.dayTotalWithdrawals = 0;
+      this._dayTotalWithdrawals = 0;
     },
 
     reportBalance: function () {

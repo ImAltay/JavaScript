@@ -1,3 +1,4 @@
+"use strict";
 import eurosFormatter from "./euroFormatter.js";
 
 /**
